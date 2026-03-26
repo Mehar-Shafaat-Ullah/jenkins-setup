@@ -4,13 +4,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/YOUR_USERNAME/YOUR_REPO.git'
+                git branch: 'main', url: 'https://github.com/Mehar-Shafaat-Ullah/jenkins-setup.git'
             }
         }
 
         stage('Build Image') {
             steps {
-                sh 'docker build -t my-onprem-app:${BUILD_NUMBER} .'
+                sh 'docker build -t my-onprem-app .'
             }
         }
 
@@ -20,7 +20,7 @@ pipeline {
                 sh 'docker stop my-app || true'
                 sh 'docker rm my-app || true'
                 // Run the new one
-                sh 'docker run -d --name my-app -p 8081:80 my-onprem-app:${BUILD_NUMBER}'
+                sh 'docker run -d --name my-app -p 8081:80 my-onprem-app'
             }
         }
     }
